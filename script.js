@@ -9,7 +9,7 @@
 const PAGES = [
   { id: 'home', href: 'index.html', label: 'Home' },
   { id: 'structure', href: 'structure.html', label: 'Structure' },
-  { id: 'naming', href: 'naming.html', label: 'File names' },
+  { id: 'naming', href: 'naming.html', label: 'Naming' },
   { id: 'archiving', href: 'archiving.html', label: 'Archiving' },
 ];
 
