@@ -7,51 +7,65 @@
 
 /* ---------- 1. Data ---------- */
 const PAGES = [
-  { id: 'home',      href: 'index.html',     label: 'Home' },
-  { id: 'structure', href: 'structure.html', label: '1 · Structure' },
-  { id: 'naming',    href: 'naming.html',    label: '2 · File names' },
-  { id: 'archiving', href: 'archiving.html', label: '3 · Archiving' },
+  { id: 'home', href: 'index.html', label: 'Home' },
+  { id: 'structure', href: 'structure.html', label: 'Structure' },
+  { id: 'naming', href: 'naming.html', label: 'File names' },
+  { id: 'archiving', href: 'archiving.html', label: 'Archiving' },
 ];
 
 // Every project or initiative gets the same subfolders.
 // (Adapted from the GEC / Breakthrough sample drive.)
 const PROJECT = [
-  { n: 'Program management', note: 'Work plans, trackers, reports and outreach content.', kids: [
-    { n: 'Work plans' }, { n: 'Trackers' }, { n: 'Reports' },
-    { n: 'Social media', kids: [{ n: 'Photo library' }, { n: 'Draft posts' }, { n: 'Draft articles' }, { n: 'Draft blogs' }] },
-  ]},
-  { n: 'Grant management', note: 'Applications, budgets and everything donors need.', kids: [
-    { n: 'Applications and award letters' }, { n: 'Budgets' }, { n: 'Cost-effectiveness calculations' },
-    { n: 'Charge codes' }, { n: 'Donor deliverables' },
-  ]},
-  { n: 'Government and research', note: 'State material, agreements and research work.', kids: [
-    { n: 'State folders', note: 'One folder per state: decks, curricula, reports, GOs.' },
-    { n: 'Governance documents', note: 'LoS and MoU.' },
-    { n: 'Research', kids: [{ n: 'Common do files' }, { n: 'Common encryption folder' }, { n: 'Research plans' }, { n: 'Dashboards' }] },
-  ]},
+  {
+    n: 'Program management', note: 'Work plans, trackers, reports and outreach content.', kids: [
+      { n: 'Work plans' }, { n: 'Trackers' }, { n: 'Reports' },
+      { n: 'Social media', kids: [{ n: 'Photo library' }, { n: 'Draft posts' }, { n: 'Draft articles' }, { n: 'Draft blogs' }] },
+    ]
+  },
+  {
+    n: 'Grant management', note: 'Applications, budgets and everything donors need.', kids: [
+      { n: 'Applications and award letters' }, { n: 'Budgets' }, { n: 'Cost-effectiveness calculations' },
+      { n: 'Charge codes' }, { n: 'Donor deliverables' },
+    ]
+  },
+  {
+    n: 'Government and research', note: 'State material, agreements and research work.', kids: [
+      { n: 'State folders', note: 'One folder per state: decks, curricula, reports, GOs.' },
+      { n: 'Governance documents', note: 'LoS and MoU.' },
+      { n: 'Research', kids: [{ n: 'Common do files' }, { n: 'Common encryption folder' }, { n: 'Research plans' }, { n: 'Dashboards' }] },
+    ]
+  },
   { n: 'Partner shared folder', note: 'The only place partner-shared files live. Keep internal drafts out.' },
 ];
 
 const withProjects = names => [
   { n: 'README', note: 'Start here: what is in this drive, who to ask, and the archive log.' },
-  { n: 'Internal', note: 'Team-only material, not shared with partners or donors.', kids: [
-    { n: 'Meeting notes' }, { n: 'Strategic thinking' }, { n: 'Onboarding' }, { n: 'Step back and teach back' }, { n: 'Job descriptions' },
-  ]},
-  { n: 'Projects', note: 'One folder per project or initiative. Every project has the same subfolders.',
-    kids: names.map(p => ({ n: p, note: `Everything for ${p}.`, kids: PROJECT })) },
-  { n: 'Common resources', note: 'Reusable material that applies across projects.', kids: [
-    { n: 'Theory of Change' }, { n: 'Monitoring tools' }, { n: 'ME transfer resources' }, { n: 'Templates' },
-  ]},
-  { n: 'Archive', note: 'Closed or superseded files, filed by project or theme, then year. See Archiving.', kids: [
-    { n: '<Project or theme>', ph: true, kids: [{ n: 'YYYY', ph: true }] },
-  ]},
+  {
+    n: 'Internal', note: 'Team-only material, not shared with partners or donors.', kids: [
+      { n: 'Meeting notes' }, { n: 'Strategic thinking' }, { n: 'Onboarding' }, { n: 'Step back and teach back' }, { n: 'Job descriptions' },
+    ]
+  },
+  {
+    n: 'Projects', note: 'One folder per project or initiative. Every project has the same subfolders.',
+    kids: names.map(p => ({ n: p, note: `Everything for ${p}.`, kids: PROJECT }))
+  },
+  {
+    n: 'Common resources', note: 'Reusable material that applies across projects.', kids: [
+      { n: 'Theory of Change' }, { n: 'Monitoring tools' }, { n: 'ME transfer resources' }, { n: 'Templates' },
+    ]
+  },
+  {
+    n: 'Archive', note: 'Closed or superseded files, filed by project or theme, then year. See Archiving.', kids: [
+      { n: '<Project or theme>', ph: true, kids: [{ n: 'YYYY', ph: true }] },
+    ]
+  },
 ];
 
 const FORBIDDEN = /[\\/:*?"<>|]/g;
 const VAGUE = /\b(final|new|latest|copy|old|temp|misc|untitled)\b/i;
 
 /* ---------- 2. Helpers ---------- */
-const $  = (s, r = document) => r.querySelector(s);
+const $ = (s, r = document) => r.querySelector(s);
 const $$ = (s, r = document) => [...r.querySelectorAll(s)];
 const val = id => $('#' + id)?.value ?? '';
 const radio = name => $(`input[name="${name}"]:checked`)?.value;
@@ -140,8 +154,10 @@ function initStructure() {
     });
     return ul;
   }
-  const root = { n: 'Root folder', note: 'One shared drive folder for the whole team. Numbered folders keep the order fixed.',
-                 kids: withProjects(['GEC', 'Another project']) };
+  const root = {
+    n: 'Root folder', note: 'One shared drive folder for the whole team. Numbered folders keep the order fixed.',
+    kids: withProjects(['GEC', 'Another project'])
+  };
   const tree = build([root], [], false); tree.className = 'tree';
   $('#tree').append(tree);
   const rootBtn = $('.node', tree); rootBtn.click();
@@ -174,10 +190,10 @@ function initNaming() {
   const mixed = ws => ws.map((w, i) => (w.length > 1 && w === w.toUpperCase()) ? w : (i ? low(w) : pas(w))).join('-');
 
   const STYLES = {
-    mixed:  (p, ws, d) => [p, mixed(ws), d].filter(Boolean).join('_'),
-    snake:  (p, ws, d) => [p, ...ws, ...d.split('-')].filter(Boolean).map(low).join('_'),
-    kebab:  (p, ws, d) => [p, ...ws, ...d.split('-')].filter(Boolean).map(low).join('-'),
-    camel:  (p, ws, d) => low(p) + ws.map(pas).join('') + d.replace(/-/g, ''),
+    mixed: (p, ws, d) => [p, mixed(ws), d].filter(Boolean).join('_'),
+    snake: (p, ws, d) => [p, ...ws, ...d.split('-')].filter(Boolean).map(low).join('_'),
+    kebab: (p, ws, d) => [p, ...ws, ...d.split('-')].filter(Boolean).map(low).join('-'),
+    camel: (p, ws, d) => low(p) + ws.map(pas).join('') + d.replace(/-/g, ''),
     pascal: (p, ws, d) => pas(p) + ws.map(pas).join('') + d.replace(/-/g, ''),
   };
 
