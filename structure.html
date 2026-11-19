@@ -1,63 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>1 · Structure · J-PAL South Asia</title>
+  <title>Structure | J-PAL South Asia</title>
   <link rel="stylesheet" href="root.css">
   <link rel="stylesheet" href="styles.css">
   <script src="script.js" defer></script>
 </head>
+
 <body data-page="structure">
   <a class="skip-link" href="#main">Skip to content</a>
   <div id="site-header"></div>
   <main id="main" class="container">
     <section>
-      <h1>1 · Structuring the drive</h1>
-      <p class="lead">One drive folder can hold many projects and initiatives. Shared areas sit at the top; each project gets its own folder with identical subfolders.</p>
+      <h1>Structuring the drive</h1>
+      <p class="lead">Two kinds of drive folders: one root folder for shared resources and initiatives, and one seperate
+        drive per project.</p>
     </section>
 
     <section class="card">
       <h2>Rules</h2>
       <ul class="rules">
-        <li>Top-level folders are numbered (<code>0</code> to <code>4</code>) and never re-ordered.</li>
-        <li>Each project or initiative is a folder inside <code>2_Projects</code>.</li>
-        <li>Every project uses the same subfolders, so anyone can find things in any project.</li>
-        <li>Partner-shared files live only in the partner shared folder.</li>
+        <li><strong>New project:</strong> create its own drive folder, using the project folder structure.</li>
+        <li><strong>New initiative:</strong> add a subfolder inside <code>2_Initiatives</code> in the root folder.</li>
+        <li>Numbered folders are never re-ordered.</li>
+        <li>Partner-shared files live only in the partner folder of a project.</li>
         <li>Keep it to 4 levels deep.</li>
       </ul>
     </section>
 
     <section>
-      <h2>Explore the structure</h2>
-      <p class="muted">Click a folder to open it. Based on the GEC sample drive.</p>
-      <div class="chips">
-        <button class="btn btn--ghost btn--sm" id="expandAll" type="button">Expand all</button>
-        <button class="btn btn--ghost btn--sm" id="collapseAll" type="button">Collapse all</button>
-      </div>
-      <div class="explorer">
-        <div class="card" id="tree"></div>
-        <aside class="card" id="detail" aria-live="polite"></aside>
+      <h2>1. Root folder</h2>
+      <p class="muted">Shared resources and initiatives. No project folders live here. Click a folder to open it.</p>
+      <div data-explorer="root">
+        <div class="chips">
+          <button class="btn btn--ghost btn--sm" data-expand type="button">Expand all</button>
+          <button class="btn btn--ghost btn--sm" data-collapse type="button">Collapse all</button>
+        </div>
+        <div class="explorer">
+          <div class="card tree-host"></div>
+          <aside class="card detail" aria-live="polite"></aside>
+        </div>
       </div>
     </section>
 
     <section>
-      <h2>Add your projects</h2>
-      <p class="muted">Adding a new project? Type its name to get its folder and subfolders.</p>
-      <form class="tool" id="builder" onsubmit="return false">
-        <div class="fields">
-          <label class="lab wide">Projects or initiatives <small>Separate with commas</small>
-            <input type="text" id="projects" value="GEC, Another project" autocomplete="off"></label>
+      <h2>2. Project drive</h2>
+      <p class="muted">One of these per project, each in its own drive folder. Click a folder to open it.</p>
+      <div data-explorer="project">
+        <div class="chips">
+          <button class="btn btn--ghost btn--sm" data-expand type="button">Expand all</button>
+          <button class="btn btn--ghost btn--sm" data-collapse type="button">Collapse all</button>
         </div>
-        <label class="check"><input type="checkbox" id="numbered" checked> Number the top-level folders</label>
-        <br>
-        <div class="output">
-          <div><span class="output__label">Folder tree</span><pre class="output__text" id="treeOut"></pre></div>
-          <button class="btn btn--sm" type="button" data-copy="#treeOut">Copy</button>
+        <div class="explorer">
+          <div class="card tree-host"></div>
+          <aside class="card detail" aria-live="polite"></aside>
         </div>
-      </form>
+      </div>
     </section>
   </main>
   <div id="site-footer"></div>
 </body>
+
 </html>

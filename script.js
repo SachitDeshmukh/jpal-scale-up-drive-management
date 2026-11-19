@@ -14,52 +14,117 @@ const PAGES = [
 ];
 
 // Every project or initiative gets the same subfolders.
-// (Adapted from the GEC / Breakthrough sample drive.)
 const PROJECT = [
-  {
-    n: 'Program management', note: 'Work plans, trackers, reports and outreach content.', kids: [
-      { n: 'Work plans' }, { n: 'Trackers' }, { n: 'Reports' },
-      { n: 'Social media', kids: [{ n: 'Photo library' }, { n: 'Draft posts' }, { n: 'Draft articles' }, { n: 'Draft blogs' }] },
-    ]
-  },
-  {
-    n: 'Grant management', note: 'Applications, budgets and everything donors need.', kids: [
-      { n: 'Applications and award letters' }, { n: 'Budgets' }, { n: 'Cost-effectiveness calculations' },
-      { n: 'Charge codes' }, { n: 'Donor deliverables' },
-    ]
-  },
-  {
-    n: 'Government and research', note: 'State material, agreements and research work.', kids: [
-      { n: 'State folders', note: 'One folder per state: decks, curricula, reports, GOs.' },
-      { n: 'Governance documents', note: 'LoS and MoU.' },
-      { n: 'Research', kids: [{ n: 'Common do files' }, { n: 'Common encryption folder' }, { n: 'Research plans' }, { n: 'Dashboards' }] },
-    ]
-  },
-  { n: 'Partner shared folder', note: 'The only place partner-shared files live. Keep internal drafts out.' },
-];
-
-const withProjects = names => [
   { n: 'README', note: 'Start here: what is in this drive, who to ask, and the archive log.' },
   {
-    n: 'Internal', note: 'Team-only material, not shared with partners or donors.', kids: [
-      { n: 'Meeting notes' }, { n: 'Strategic thinking' }, { n: 'Onboarding' }, { n: 'Step back and teach back' }, { n: 'Job descriptions' },
+    n: 'Literature_Evidence', note: 'Intervention summaries, resources, literature.', kids: [
+      { n: 'Evaluation_Summaries' },
+      { n: 'Knowledge_Sharing' },
     ]
   },
   {
-    n: 'Projects', note: 'One folder per project or initiative. Every project has the same subfolders.',
-    kids: names.map(p => ({ n: p, note: `Everything for ${p}.`, kids: PROJECT }))
-  },
-  {
-    n: 'Common resources', note: 'Reusable material that applies across projects.', kids: [
-      { n: 'Theory of Change' }, { n: 'Monitoring tools' }, { n: 'ME transfer resources' }, { n: 'Templates' },
+    n: 'Program_Management', note: 'Work plans, trackers, reports and outreach content.', kids: [
+      { n: 'Work_Plans' },
+      { n: 'Trackers' },
+      { n: 'Copy_Edited_Reports' },
+      {
+        n: 'Social_Media', kids: [
+          { n: 'Photo_library' },
+          { n: 'Posts_Articles_Blogs' },
+          { n: 'Videos' },
+          { n: 'Pitches_Pagers' }
+        ]
+      },
     ]
   },
   {
-    n: 'Archive', note: 'Closed or superseded files, filed by project or theme, then year. See Archiving.', kids: [
-      { n: '<Project or theme>', ph: true, kids: [{ n: 'YYYY', ph: true }] },
+    n: 'Grant_Management', note: 'Applications, budgets and everything donors need.', kids: [
+      { n: 'Applications_Award_Letters' },
+      { n: 'Budgets' },
+      { n: 'Cost_effectiveness_Calculations' },
+      { n: 'Charge_Codes' },
+      { n: 'Donor_Deliverables' },
+      { n: 'Vendor_Contracts' },
+      { n: 'Invoices' },
+    ]
+  },
+  {
+    n: 'Governance', note: 'Outreach, agreements, and resources from the government.', kids: [
+      {
+        n: '<state_folder>', note: 'One folder per state: decks, curricula, reports, GOs.', ph: true, kids: [
+          { n: 'Agreements', note: 'LoS and MoU.' },
+          { n: 'Orders', note: 'Released notices and orders.' },
+          { n: 'Outreach', note: 'Decks, pagers, eval summaries.' },
+          { n: 'Policy_Collateral', note: 'Policies, curricula, state reports.' },
+        ]
+      }
+    ]
+  },
+  {
+    n: 'Reserch_and_Operations', note: 'State material, agreements and research work.', kids: [
+      {
+        n: '<state_folder>', note: 'One folder per state: RO, data, analysis, reports.', ph: true, kids: [
+          { n: 'Raw_Data', note: 'Encrypted data files.' },
+          { n: 'Analysis_Code', note: 'Clean data and analysis code.' },
+          { n: 'Reports_Outputs', note: 'Code output and designed reports.' },
+          { n: 'Operations', note: 'M&E tools, RO collateral, field plans and attendance.' },
+        ]
+      },
+      { n: 'Theory_of_Change' }, { n: 'Monitoring_tools' }, { n: 'M&E_Transfer_Resources' },
+    ]
+  },
+  { n: 'Partner_Folder', note: 'The only place partner-shared files live. Keep internal drafts out.' },
+  {
+    n: 'Archive', note: 'Closed or superseded files, filed by theme. See Archiving.', kids: [
+      { n: '<Theme_YYYY_MM_DD>', ph: true },
     ]
   },
 ];
+
+// (1) Root folder: shared resources only. Projects are NOT kept here.
+const ROOT_FOLDER = [
+  { n: 'README', note: 'Start here: what is in this drive, who to ask, and the archive log.' },
+  {
+    n: 'Human_Resource', note: 'Team-only material, not shared with partners or donors.', kids: [
+      { n: 'Hiring' }, { n: 'Onboarding' }, { n: 'Teach_Backs' },
+    ]
+  },
+  {
+    n: 'Initiatives', note: 'One subfolder per initiative. A new initiative gets a subfolder here.', kids: [
+      {
+        n: '<initiative_name>', ph: true, note: 'Everything for one initiative.', kids: [
+          { n: 'Background_Literature_Review' },
+          { n: 'Notes_Minutes' },
+          { n: 'Budgets_Reports' },
+          { n: 'Onboarding' },
+          { n: 'Outreach' },
+        ]
+      },
+    ]
+  },
+  {
+    n: 'Common_Resources', note: 'Reusable material that applies across projects and initiatives.', kids: [
+      { n: 'Meeting_Notes' }, { n: 'Strategic_Thinking' }, { n: 'Comms_Templates' },
+    ]
+  },
+  {
+    n: 'Archive', note: 'Closed or superseded files, filed by theme. See Archiving.', kids: [
+      { n: '<Theme_YYYY_MM_DD>', ph: true },
+    ]
+  },
+];
+
+// Both structures shown on the Structure page. `start` = first folder number (null = unnumbered).
+const EXPLORERS = {
+  root: {
+    n: '<root_folder>', ph: true, start: 0, kids: ROOT_FOLDER,
+    note: 'The team drive folder. Shared resources only. Projects live in their own drive folders.'
+  },
+  project: {
+    n: '<project_drive>', ph: true, start: 0, kids: PROJECT,
+    note: 'Each new project gets its own drive. Every project has the same subfolders.'
+  },
+};
 
 const FORBIDDEN = /[\\/:*?"<>|]/g;
 const VAGUE = /\b(final|new|latest|copy|old|temp|misc|untitled)\b/i;
@@ -125,59 +190,43 @@ function renderLayout() {
 
 /* ---------- 4a. Page: Structure ---------- */
 function initStructure() {
-  const label = (n, i, top, numbered) => (top && numbered) ? `${i}_${n.n}` : n.n;
+  $$('[data-explorer]').forEach(box => {
+    const cfg = EXPLORERS[box.dataset.explorer], detail = $('.detail', box); let selected;
+    const label = (node, i, start) => start === null ? node.n : `${i + start}_${node.n}`;
 
-  // Explorer: click a folder to open it and read what goes inside
-  const detail = $('#detail'); let selected;
-  function select(btn, node, path) {
-    selected?.removeAttribute('aria-current');
-    selected = btn; btn.setAttribute('aria-current', 'true');
-    detail.replaceChildren(
-      el('h3', '', btn.dataset.label), el('p', 'path', path.join(' / ')),
-      el('p', '', node.note || `Part of “${path[path.length - 2] || 'the drive'}”.`),
-      el('p', 'muted small', node.kids ? `${node.kids.length} subfolders` : 'Lowest level: files live here.'));
-  }
-  function build(nodes, path, top) {
-    const ul = el('ul');
-    nodes.forEach((node, i) => {
-      const text = label(node, i, top, true), here = [...path, text];
-      const li = el('li'), btn = el('button', 'node'); btn.type = 'button'; btn.dataset.label = text;
-      btn.append(el('span', 'ico'), el('span', node.ph ? 'ph' : '', text));
-      li.append(btn);
-      let sub;
-      if (node.kids) { sub = build(node.kids, here, path.length === 0); sub.hidden = true; li.append(sub); btn.setAttribute('aria-expanded', 'false'); }
-      btn.addEventListener('click', () => {
-        select(btn, node, here);
-        if (sub) { sub.hidden = !sub.hidden; btn.setAttribute('aria-expanded', String(!sub.hidden)); }
+    // Click a folder to open it and read what goes inside
+    function select(btn, node, path) {
+      selected?.removeAttribute('aria-current');
+      selected = btn; btn.setAttribute('aria-current', 'true');
+      detail.replaceChildren(
+        el('h3', '', btn.dataset.label), el('p', 'path', path.join(' / ')),
+        el('p', '', node.note || `Part of “${path[path.length - 2] || 'the drive'}”.`),
+        el('p', 'muted small', node.kids ? `${node.kids.length} subfolders` : 'Lowest level: files live here.'));
+    }
+    function build(nodes, path, start) {
+      const ul = el('ul');
+      nodes.forEach((node, i) => {
+        const text = label(node, i, start), here = [...path, text];
+        const li = el('li'), btn = el('button', 'node'); btn.type = 'button'; btn.dataset.label = text;
+        btn.append(el('span', 'ico'), el('span', node.ph ? 'ph' : '', text));
+        li.append(btn);
+        let sub;
+        if (node.kids) { sub = build(node.kids, here, path.length === 0 ? cfg.start : null); sub.hidden = true; li.append(sub); btn.setAttribute('aria-expanded', 'false'); }
+        btn.addEventListener('click', () => {
+          select(btn, node, here);
+          if (sub) { sub.hidden = !sub.hidden; btn.setAttribute('aria-expanded', String(!sub.hidden)); }
+        });
+        ul.append(li);
       });
-      ul.append(li);
-    });
-    return ul;
-  }
-  const root = {
-    n: 'Root folder', note: 'One shared drive folder for the whole team. Numbered folders keep the order fixed.',
-    kids: withProjects(['GEC', 'Another project'])
-  };
-  const tree = build([root], [], false); tree.className = 'tree';
-  $('#tree').append(tree);
-  const rootBtn = $('.node', tree); rootBtn.click();
-  const rootSub = $('ul', tree);
-  const setAll = open => $$('ul', tree).forEach(u => { u.hidden = !open; u.previousElementSibling.setAttribute('aria-expanded', String(open)); });
-  $('#expandAll').addEventListener('click', () => setAll(true));
-  $('#collapseAll').addEventListener('click', () => { setAll(false); rootSub.hidden = false; rootBtn.setAttribute('aria-expanded', 'true'); });
-
-  // Builder: type project names, get a folder tree
-  live($('#builder'), () => {
-    const names = [...new Set(val('projects').split(',').map(clean).filter(Boolean))];
-    const numbered = $('#numbered').checked;
-    const out = ['Root folder/'];
-    const walk = (nodes, indent, top) => nodes.forEach((n, i) => {
-      const last = i === nodes.length - 1;
-      out.push(indent + (last ? '└── ' : '├── ') + label(n, i, top, numbered));
-      if (n.kids) walk(n.kids, indent + (last ? '    ' : '│   '), false);
-    });
-    walk(withProjects(names.length ? names : ['Project name']), '', true);
-    $('#treeOut').textContent = out.join('\n');
+      return ul;
+    }
+    const tree = build([cfg], [], null); tree.className = 'tree';
+    $('.tree-host', box).append(tree);
+    const rootBtn = $('.node', tree); rootBtn.click();
+    const rootSub = $('ul', tree);
+    const setAll = open => $$('ul', tree).forEach(u => { u.hidden = !open; u.previousElementSibling.setAttribute('aria-expanded', String(open)); });
+    $('[data-expand]', box).addEventListener('click', () => setAll(true));
+    $('[data-collapse]', box).addEventListener('click', () => { setAll(false); rootSub.hidden = false; rootBtn.setAttribute('aria-expanded', 'true'); });
   });
 }
 
