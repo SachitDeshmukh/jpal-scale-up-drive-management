@@ -267,10 +267,17 @@ function initNaming() {
 function initArchiving() {
   $('#theme').value = projectCode();
   $('#year').value = new Date().getFullYear();
+  const snakeCase = value => value.replace(/([A-Z]+)([A-Z][a-z])/g, '$1_$2')
+    .replace(/([a-z0-9])([A-Z])/g, '$1_$2')
+    .replace(/[^A-Za-z0-9]+/g, '_')
+    .replace(/^_|_$/g, '')
+    .toLowerCase();
 
   live($('#archForm'), () => {
-    const file = clean(val('file')) || 'file-name.docx', theme = clean(val('theme')) || '<Project or theme>', year = val('year') || new Date().getFullYear();
-    const dir = (radio('conv') === 'A' ? `4_Archive/${theme}/${year}/` : `4_Archive/${year}/${theme}/`);
+    const file = snakeCase(clean(val('file'))) || 'file-name.docx';
+    const theme = snakeCase(clean(val('theme'))) || '<Milestone>';
+    const year = val('year') || new Date().getFullYear();
+    const dir = (radio('conv') === 'A' ? `Archive/${theme}/` : `Archive/${year}/`);
     $('#archPath').textContent = dir;
     $('#archLog').textContent = [today(), file, `moved to ${dir}`].join(' | ');
   });

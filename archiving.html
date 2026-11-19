@@ -1,20 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>3 · Archiving · J-PAL South Asia</title>
+  <title>Archiving | J-PAL South Asia</title>
   <link rel="stylesheet" href="root.css">
   <link rel="stylesheet" href="styles.css">
   <script src="script.js" defer></script>
 </head>
+
 <body data-page="archiving">
   <a class="skip-link" href="#main">Skip to content</a>
   <div id="site-header"></div>
   <main id="main" class="container">
     <section>
-      <h1>3 · Archiving</h1>
-      <p class="lead">Archiving keeps live folders clean without losing history. File by project or theme, then year.</p>
+      <h1>Archiving</h1>
+      <p class="lead">Archiving keeps live folders clean without losing history. Archive files within each project and
+        initiative by milestones and years.
+      </p>
     </section>
 
     <section class="grid">
@@ -22,17 +26,17 @@
         <h2>When to archive</h2>
         <ul class="rules">
           <li>A project phase or grant has closed.</li>
-          <li>A newer version replaces the file.</li>
-          <li>Nobody has opened it for 12 months.</li>
+          <li>A older version needs to be preserved.</li>
+          <li>Nobody has opened the file for 12 months.</li>
           <li>Never archive the only copy of a live template.</li>
         </ul>
       </div>
       <div class="card">
         <h2>How to archive</h2>
         <ol class="rules">
-          <li>Keep one version; delete duplicates.</li>
-          <li>Move it to <code>4_Archive</code>, under its project or theme and year.</li>
-          <li>Add a line to <code>0_README</code>.</li>
+          <li>Keep the latest relevant version; delete duplicates.</li>
+          <li>Move it to the <code>Archive</code> folder, under a milestone or year.</li>
+          <li>Add a line to <code>0_README</code> to log the move.</li>
         </ol>
       </div>
     </section>
@@ -43,14 +47,18 @@
         <fieldset>
           <legend>Order</legend>
           <div class="options">
-            <label class="option"><input type="radio" name="conv" value="A" checked><b>Project, then year</b><code>4_Archive/GEC/2026/</code><span>Best for finding a project's history.</span></label>
-            <label class="option"><input type="radio" name="conv" value="B"><b>Year, then project</b><code>4_Archive/2026/GEC/</code><span>Best for yearly clean-ups.</span></label>
+            <label class="option"><input type="radio" name="conv" value="A" checked><b>Milestone
+                based</b><code>eg. Archive/GEC_ECO_Cohort_1/</code><span>Best for finding a project's
+                history.</span></label>
+            <label class="option"><input type="radio" name="conv" value="B"><b>Year
+                marked</b><code>eg. Archive/2027/</code><span>Best for yearly clean-ups.</span></label>
           </div>
         </fieldset>
         <div class="fields">
-          <label class="lab wide">File name <input type="text" id="file" value="GEC_Budget-review_2026-03-14.xlsx" autocomplete="off"></label>
-          <label class="lab">Project or theme <small>e.g. GEC, Internal, Common resources</small> <input type="text" id="theme"></label>
-          <label class="lab">Year of the work <input type="number" id="year" min="2000" max="2100"></label>
+          <label class="lab wide">File name <input type="text" id="file" value="GEC_Budget-review_2026-03-14.xlsx"
+              autocomplete="off"></label>
+          <label class="lab">Milestone<input type="text" id="theme"></label>
+          <label class="lab">Year<input type="number" id="year" min="2002" max="2100"></label>
         </div>
         <div class="output">
           <div><span class="output__label">Move it to</span><span class="output__text" id="archPath"></span></div>
@@ -81,4 +89,5 @@
   </main>
   <div id="site-footer"></div>
 </body>
+
 </html>
