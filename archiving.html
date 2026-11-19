@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>3 · Archiving · J-PAL South Asia</title>
+  <link rel="stylesheet" href="root.css">
+  <link rel="stylesheet" href="styles.css">
+  <script src="script.js" defer></script>
+</head>
+<body data-page="archiving">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <div id="site-header"></div>
+  <main id="main" class="container">
+    <section>
+      <h1>3 · Archiving</h1>
+      <p class="lead">Archiving keeps live folders clean without losing history. File by project or theme, then year.</p>
+    </section>
+
+    <section class="grid">
+      <div class="card">
+        <h2>When to archive</h2>
+        <ul class="rules">
+          <li>A project phase or grant has closed.</li>
+          <li>A newer version replaces the file.</li>
+          <li>Nobody has opened it for 12 months.</li>
+          <li>Never archive the only copy of a live template.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h2>How to archive</h2>
+        <ol class="rules">
+          <li>Keep one version; delete duplicates.</li>
+          <li>Move it to <code>4_Archive</code>, under its project or theme and year.</li>
+          <li>Add a line to <code>0_README</code>.</li>
+        </ol>
+      </div>
+    </section>
+
+    <section>
+      <h2>Try it</h2>
+      <form class="tool" id="archForm" onsubmit="return false">
+        <fieldset>
+          <legend>Order</legend>
+          <div class="options">
+            <label class="option"><input type="radio" name="conv" value="A" checked><b>Project, then year</b><code>4_Archive/GEC/2026/</code><span>Best for finding a project's history.</span></label>
+            <label class="option"><input type="radio" name="conv" value="B"><b>Year, then project</b><code>4_Archive/2026/GEC/</code><span>Best for yearly clean-ups.</span></label>
+          </div>
+        </fieldset>
+        <div class="fields">
+          <label class="lab wide">File name <input type="text" id="file" value="GEC_Budget-review_2026-03-14.xlsx" autocomplete="off"></label>
+          <label class="lab">Project or theme <small>e.g. GEC, Internal, Common resources</small> <input type="text" id="theme"></label>
+          <label class="lab">Year of the work <input type="number" id="year" min="2000" max="2100"></label>
+        </div>
+        <div class="output">
+          <div><span class="output__label">Move it to</span><span class="output__text" id="archPath"></span></div>
+          <button class="btn btn--sm" type="button" data-copy="#archPath">Copy</button>
+        </div>
+        <div class="output">
+          <div><span class="output__label">Line for 0_README</span><span class="output__text" id="archLog"></span></div>
+          <button class="btn btn--sm" type="button" data-copy="#archLog">Copy</button>
+        </div>
+      </form>
+    </section>
+
+    <section>
+      <h2>Ready to archive?</h2>
+      <div class="tool">
+        <ul class="checks" id="archList" style="gap:.6rem">
+          <li><label class="check"><input type="checkbox"> The right version is kept and named correctly</label></li>
+          <li><label class="check"><input type="checkbox"> Drafts and duplicates are deleted</label></li>
+          <li><label class="check"><input type="checkbox"> Nobody still needs it live</label></li>
+          <li><label class="check"><input type="checkbox"> Shared links and access are reviewed</label></li>
+          <li><label class="check"><input type="checkbox"> The move is logged in 0_README</label></li>
+        </ul>
+        <br>
+        <progress id="progress" max="5" value="0" aria-label="Archive readiness"></progress>
+        <p id="progressText" class="muted"></p>
+      </div>
+    </section>
+  </main>
+  <div id="site-footer"></div>
+</body>
+</html>

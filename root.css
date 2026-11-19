@@ -1,0 +1,28 @@
+/* root.css — fonts and colours only. Brand: J-PAL Visual Brand Guidelines 2025. Web font: Open Sans. */
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap");
+
+:root {
+  /* J-PAL palette (orange lives in the logo; blue is used for UI) */
+  --jpal-orange: #E35925;
+  --jpal-teal:   #2FAA9F;
+  --jpal-green:  #61B77F;
+  --jpal-yellow: #F2C200;
+  --jpal-blue:   #2D616E;
+
+  /* Theme */
+  --bg:       #FFFFFF;
+  --surface:  #F5F8F8;
+  --text:     #1F2D31;
+  --muted:    #52666B;
+  --heading:  #2D616E;
+  --border:   #D3DFE1;
+  --primary:  #2D616E;
+  --on-primary: #FFFFFF;
+  --ok:       #2A7A4B;
+  --warn:     #9A6200;
+  --bad:      #C0392B;
+
+  --font-body: "Open Sans", "Century Gothic", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: ui-monospace, Menlo, Consolas, monospace;
+  --radius: 6px;
+}
